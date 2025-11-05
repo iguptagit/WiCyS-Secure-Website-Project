@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Register</h2>
+<form method="POST">
+  <label>Email: <input name="email" type="email" required></label><br>
+  <label>Password: <input id="pw" name="password" type="password" required></label>
+  <button type="button" id="toggle">Show</button><br>
+  <small>Password must be ≥8 chars and include a number and a letter.</small><br>
+  <button type="submit">Register</button>
+</form>
+
+<script>
+document.getElementById('toggle').addEventListener('click', function(){
+  const p = document.getElementById('pw');
+  if(p.type === 'password'){ p.type = 'text'; this.textContent = 'Hide'; }
+  else{ p.type = 'password'; this.textContent = 'Show'; }
+});
+</script>
+{% endblock %}

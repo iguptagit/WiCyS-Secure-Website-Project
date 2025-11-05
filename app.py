@@ -15,7 +15,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Rate limiter: 5 login attempts per 15 minutes per IP (adjust for demo)
-limiter = Limiter(app, key_func=get_remote_address, default_limits=[])
+limiter = Limiter(
+    key_func=get_remote_address, 
+    default_limits=["10 per minute"]
+)
+limiter.init_app(app)
 
 # Serializer for email tokens
 serializer = URLSafeTimedSerializer(app.secret_key)

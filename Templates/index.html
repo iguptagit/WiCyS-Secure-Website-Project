@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Home - Secure Website</title>
-</head>
-<body>
-  <h1>Secure Website Demo</h1>
-  {% if user_id %}
-    <p>Welcome, user {{ user_id }}!</p>
-    <p><a href="/secret">Go to secret page</a></p>
-    <p><a href="/logout">Logout</a></p>
-  {% else %}
-    <p><a href="/register">Register</a> | <a href="/login">Login</a></p>
-  {% endif %}
-</body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Home — Secure Demo{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1>Secure Website Demo</h1>
+    <p class="lead">A tiny demo showing secure sign-up, login, rate-limiting and email-confirmation patterns.</p>
+
+    {% if user_id %}
+      <div class="card">
+        <p>Welcome — logged in as user <strong>{{ user_id }}</strong>.</p>
+        <p><a class="button" href="{{ url_for('secret') }}">Visit secret page</a></p>
+      </div>
+    {% else %}
+      <div class="actions">
+        <a class="button" href="{{ url_for('register') }}">Create an account</a>
+        <a class="muted" href="{{ url_for('login') }}">Already registered? Log in</a>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

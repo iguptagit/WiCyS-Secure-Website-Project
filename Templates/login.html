@@ -1,13 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
-<body>
-  <h1>Login</h1>
-  <form method="POST">
-    <label>Email: <input type="email" name="email" required></label><br>
-    <label>Password: <input type="password" name="password" required></label><br>
-    <button type="submit">Login</button>
-  </form>
-  <p><a href="/">Back</a></p>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Login — Secure Demo{% endblock %}
+
+{% block content %}
+  <div class="card form-card">
+    <h2>Login</h2>
+    <form method="POST" class="form">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email">
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <div class="pw-row">
+          <input id="pw-login" type="password" name="password" required>
+          <button type="button" id="toggle-login" class="small-btn">Show</button>
+        </div>
+      </label>
+
+      <div class="form-actions">
+        <button class="button" type="submit">Login</button>
+        <a class="muted" href="{{ url_for('index') }}">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+<script>
+document.getElementById('toggle-login').addEventListener('click', function(){
+  const p = document.getElementById('pw-login');
+  if(p.type === 'password'){ p.type = 'text'; this.textContent = 'Hide'; }
+  else{ p.type = 'password'; this.textContent = 'Show'; }
+});
+</script>
+{% endblock %}

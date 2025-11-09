@@ -1,20 +1,50 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Secure Mini</title>
-  <style>/* tiny styles for demo */</style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Secure Website Demo{% endblock %}</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <ul>
-      {% for cat,msg in messages %}
-        <li><strong>{{cat}}:</strong> {{msg}}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-  {% block content %}{% endblock %}
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="{{ url_for('index') }}">WebsiteDemo</a>
+      <nav>
+        {% if user_id %}
+          <a href="{{ url_for('secret') }}">Secret</a>
+          <a href="{{ url_for('logout') }}" class="muted">Logout</a>
+        {% else %}
+          <a href="{{ url_for('register') }}">Register</a>
+          <a href="{{ url_for('login') }}" class="button">Login</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap">
+          {% for cat,msg in messages %}
+            <div class="flash {{ cat|lower }}">
+              <strong>{{ cat.title() }}:</strong> {{ msg }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container small">WiCyS Secure Website Demo</div>
+  </footer>
 </body>
 </html>

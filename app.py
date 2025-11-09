@@ -91,9 +91,9 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html')
 
-# limit login to 5 attempts per 15 minutes per IP
+# limit login to 10 attempts per 2 minutes per IP
 @app.route('/login', methods=['GET','POST'])
-@limiter.limit("5 per 15 minutes")
+@limiter.limit("10 per 2 minutes")
 def login():
     if request.method == 'POST':
         email = request.form['email'].lower().strip()

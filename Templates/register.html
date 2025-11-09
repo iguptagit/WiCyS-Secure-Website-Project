@@ -1,13 +1,31 @@
 {% extends "layout.html" %}
+{% block title %}Register — Secure Demo{% endblock %}
+
 {% block content %}
-<h2>Register</h2>
-<form method="POST">
-  <label>Email: <input name="email" type="email" required></label><br>
-  <label>Password: <input id="pw" name="password" type="password" required></label>
-  <button type="button" id="toggle">Show</button><br>
-  <small>Password must be ≥8 chars and include a number and a letter.</small><br>
-  <button type="submit">Register</button>
-</form>
+  <div class="card form-card">
+    <h2>Register</h2>
+    <form method="POST" class="form">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email">
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <div class="pw-row">
+          <input id="pw" type="password" name="password">
+          <button type="button" id="toggle" class="small-btn">Show</button>
+        </div>
+      </label>
+
+      <small class="hint">Password must be at least 8 characters and include a number and a letter.</small>
+
+      <div class="form-actions">
+        <button class="button" type="submit">Register</button>
+        <a class="muted" href="{{ url_for('index') }}">Cancel</a>
+      </div>
+    </form>
+  </div>
 
 <script>
 document.getElementById('toggle').addEventListener('click', function(){

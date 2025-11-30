@@ -27,6 +27,7 @@
 <script>
 document.getElementById('toggle-login').addEventListener('click', function(){
   const p = document.getElementById('pw-login');
+  // toggle password functionality
   if(p.type === 'password'){ p.type = 'text'; this.textContent = 'Hide'; }
   else{ p.type = 'password'; this.textContent = 'Show'; }
 });

@@ -30,6 +30,7 @@
 <script>
 document.getElementById('toggle').addEventListener('click', function(){
   const p = document.getElementById('pw');
+  // toggle password functionality
   if(p.type === 'password'){ p.type = 'text'; this.textContent = 'Hide'; }
   else{ p.type = 'password'; this.textContent = 'Show'; }
 });
